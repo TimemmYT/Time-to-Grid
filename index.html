@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Time to Grid</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="ttg-header">
+    <div class="wordmark">
+      <span class="mark-grid" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <h1>TIME<br>TO GRID</h1>
+    </div>
+    <div class="host-badge" id="hostBadge">--</div>
+  </header>
+
+  <section class="preview-wrap">
+    <canvas id="preview" width="270" height="480"></canvas>
+    <div class="preview-label" id="previewLabel">APERCU 9:16</div>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="platform">PLATEFORME</button>
+    <button class="tab" data-tab="grid">GRILLE</button>
+  </nav>
+
+  <main>
+
+    <!-- ONGLET PLATEFORME -->
+    <section class="tab-panel active" id="tab-platform">
+      <div class="choice-grid" id="platformChoices">
+        <button class="choice active" data-platform="none">
+          <span class="choice-ico">&#8709;</span>
+          <span class="choice-name">Aucune</span>
+        </button>
+        <button class="choice" data-platform="reels">
+          <span class="choice-ico">IG</span>
+          <span class="choice-name">Reels</span>
+        </button>
+        <button class="choice" data-platform="tiktok">
+          <span class="choice-ico">TT</span>
+          <span class="choice-name">TikTok</span>
+        </button>
+        <button class="choice" data-platform="shorts">
+          <span class="choice-ico">YT</span>
+          <span class="choice-name">Shorts</span>
+        </button>
+      </div>
+
+      <div class="opt-row" id="rowBorders">
+        <div class="opt-text">
+          <span class="opt-name">Bordures Insta</span>
+          <span class="opt-sub">Zone d'affichage reelle (bandes noires)</span>
+        </div>
+        <button class="switch" id="swBorders" role="switch" aria-checked="false"></button>
+      </div>
+
+      <div class="opt-row" id="rowFeed">
+        <div class="opt-text">
+          <span class="opt-name">Apercu feed 4:5</span>
+          <span class="opt-sub">Cadre du recadrage feed Instagram</span>
+        </div>
+        <button class="switch" id="swFeed" role="switch" aria-checked="false"></button>
+      </div>
+    </section>
+
+    <!-- ONGLET GRILLE -->
+    <section class="tab-panel" id="tab-grid">
+      <div class="choice-grid" id="gridChoices">
+        <button class="choice active" data-grid="none">
+          <span class="choice-glyph g-none"></span>
+          <span class="choice-name">Aucune</span>
+        </button>
+        <button class="choice" data-grid="thirds">
+          <span class="choice-glyph g-thirds"></span>
+          <span class="choice-name">Tiers</span>
+        </button>
+        <button class="choice" data-grid="center">
+          <span class="choice-glyph g-center"></span>
+          <span class="choice-name">Centre</span>
+        </button>
+        <button class="choice" data-grid="quarters">
+          <span class="choice-glyph g-quarters"></span>
+          <span class="choice-name">Quarts</span>
+        </button>
+        <button class="choice" data-grid="golden">
+          <span class="choice-glyph g-golden"></span>
+          <span class="choice-name">Or</span>
+        </button>
+        <button class="choice" data-grid="diag">
+          <span class="choice-glyph g-diag"></span>
+          <span class="choice-name">Diagonales</span>
+        </button>
+      </div>
+
+      <div class="custom-row">
+        <span class="opt-name">Grille perso</span>
+        <div class="stepper">
+          <button data-step="cols-">-</button>
+          <span id="colsVal">3</span><small>COL</small>
+          <button data-step="cols+">+</button>
+        </div>
+        <div class="stepper">
+          <button data-step="rows-">-</button>
+          <span id="rowsVal">3</span><small>LIG</small>
+          <button data-step="rows+">+</button>
+        </div>
+        <button class="choice slim" id="customApply" data-grid="custom">
+          <span class="choice-name">Activer</span>
+        </button>
+      </div>
+
+      <div class="opt-row">
+        <div class="opt-text"><span class="opt-name">Opacite</span></div>
+        <input type="range" id="opacity" min="10" max="100" value="60">
+        <span class="range-val" id="opacityVal">60</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="quickbar">
+    <button class="btn-main" id="btnApply">APPLIQUER</button>
+    <button class="btn-side" id="btnToggle" title="Afficher / masquer">ON</button>
+    <button class="btn-side danger" id="btnClear" title="Tout effacer">X</button>
+  </footer>
+
+  <div class="status" id="status">PRET</div>
+
+  <script src="js/CSInterface.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

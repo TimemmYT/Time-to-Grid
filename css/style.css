@@ -1,0 +1,223 @@
+/* TIME TO GRID - noir & blanc, brut, rapide */
+
+:root {
+  --bg: #000000;
+  --panel: #0d0d0d;
+  --line: #ffffff;
+  --txt: #ffffff;
+  --muted: #7a7a7a;
+  --hit: #1a1a1a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+
+html, body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: "Arial Black", "Segoe UI", Arial, sans-serif;
+  font-size: 12px;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body { display: flex; flex-direction: column; min-height: 100%; }
+
+/* ---------- HEADER ---------- */
+.ttg-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--line);
+}
+.wordmark { display: flex; align-items: center; gap: 10px; }
+.wordmark h1 {
+  font-size: 15px; line-height: 0.95; letter-spacing: 0.06em;
+  font-weight: 900; text-transform: uppercase;
+}
+.mark-grid {
+  width: 26px; height: 26px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+}
+.mark-grid i { background: var(--line); display: block; }
+.mark-grid i:nth-child(4) { background: transparent; border: 2px solid var(--line); }
+
+.host-badge {
+  border: 2px solid var(--line);
+  padding: 4px 8px;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.1em;
+}
+
+/* ---------- PREVIEW ---------- */
+.preview-wrap {
+  position: relative;
+  display: flex; justify-content: center;
+  padding: 14px;
+  background:
+    repeating-linear-gradient(45deg, #050505 0 8px, #0a0a0a 8px 16px);
+  border-bottom: 2px solid var(--line);
+}
+#preview {
+  border: 2px solid var(--line);
+  background: #111;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 9/16;
+  width: min(200px, 60%);
+}
+.preview-label {
+  position: absolute; bottom: 6px; right: 10px;
+  font-size: 9px; letter-spacing: 0.15em; color: var(--muted);
+}
+
+/* ---------- TABS ---------- */
+.tabs { display: flex; border-bottom: 2px solid var(--line); }
+.tab {
+  flex: 1; padding: 11px 0;
+  background: var(--bg); color: var(--muted);
+  border: none; border-right: 2px solid var(--line);
+  font: inherit; font-size: 12px; font-weight: 900; letter-spacing: 0.12em;
+  cursor: pointer;
+}
+.tab:last-child { border-right: none; }
+.tab.active { background: var(--line); color: var(--bg); }
+.tab:focus-visible { outline: 2px dashed var(--line); outline-offset: -4px; }
+
+/* ---------- PANELS ---------- */
+main { flex: 1; }
+.tab-panel { display: none; padding: 12px; }
+.tab-panel.active { display: block; }
+
+.choice-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-bottom: 12px;
+}
+.choice {
+  background: var(--panel); color: var(--txt);
+  border: 2px solid #2a2a2a;
+  padding: 12px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  font: inherit; cursor: pointer;
+  transition: border-color .08s;
+}
+.choice:hover { border-color: var(--muted); }
+.choice.active { border-color: var(--line); background: var(--hit); }
+.choice.active .choice-name { color: var(--txt); }
+.choice-name { font-size: 10px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.choice-ico { font-size: 16px; font-weight: 900; letter-spacing: 0.05em; }
+
+/* glyphes de grilles dessines en CSS */
+.choice-glyph { width: 34px; height: 34px; border: 2px solid var(--txt); position: relative; display: block; }
+.g-thirds { background:
+  linear-gradient(var(--txt),var(--txt)) 33% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 67% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 33%/100% 2px no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 67%/100% 2px no-repeat; }
+.g-center { background:
+  linear-gradient(var(--txt),var(--txt)) 50% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 50%/100% 2px no-repeat; }
+.g-quarters { background:
+  linear-gradient(var(--txt),var(--txt)) 25% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 50% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 75% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 25%/100% 2px no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 50%/100% 2px no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 75%/100% 2px no-repeat; }
+.g-golden { background:
+  linear-gradient(var(--txt),var(--txt)) 38.2% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 61.8% 0/2px 100% no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 38.2%/100% 2px no-repeat,
+  linear-gradient(var(--txt),var(--txt)) 0 61.8%/100% 2px no-repeat; }
+.g-diag::before, .g-diag::after {
+  content: ""; position: absolute; left: -4px; right: -4px; top: 50%;
+  border-top: 2px solid var(--txt);
+}
+.g-diag::before { transform: rotate(45deg); }
+.g-diag::after  { transform: rotate(-45deg); }
+
+/* ---------- OPTIONS ---------- */
+.opt-row {
+  display: flex; align-items: center; gap: 10px;
+  border: 2px solid #2a2a2a;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: var(--panel);
+}
+.opt-text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.opt-name { font-size: 11px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.opt-sub { font-size: 9px; color: var(--muted); font-family: Arial, sans-serif; letter-spacing: 0.03em; }
+
+.switch {
+  width: 44px; height: 24px; flex: none;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  position: relative; cursor: pointer;
+}
+.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; background: var(--muted);
+  transition: left .1s, background .1s;
+}
+.switch[aria-checked="true"]::after { left: 22px; background: var(--line); }
+
+input[type="range"] {
+  flex: 1; -webkit-appearance: none; height: 2px; background: var(--line);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  background: var(--line); border: none; cursor: pointer;
+}
+.range-val { width: 26px; text-align: right; font-size: 11px; font-weight: 900; }
+
+/* ---------- CUSTOM GRID ---------- */
+.custom-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  border: 2px solid #2a2a2a; background: var(--panel);
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.stepper { display: flex; align-items: center; gap: 5px; }
+.stepper button {
+  width: 24px; height: 24px;
+  background: var(--bg); color: var(--txt);
+  border: 2px solid var(--line);
+  font: inherit; font-weight: 900; cursor: pointer; line-height: 1;
+}
+.stepper button:active { background: var(--line); color: var(--bg); }
+.stepper span { font-size: 13px; font-weight: 900; min-width: 14px; text-align: center; }
+.stepper small { font-size: 8px; color: var(--muted); letter-spacing: 0.1em; }
+.choice.slim { flex-direction: row; padding: 8px 12px; margin-left: auto; }
+
+/* ---------- QUICK BAR ---------- */
+.quickbar {
+  display: flex; gap: 8px;
+  padding: 12px;
+  border-top: 2px solid var(--line);
+  background: var(--bg);
+  position: sticky; bottom: 0;
+}
+.btn-main {
+  flex: 1; padding: 14px 0;
+  background: var(--line); color: var(--bg);
+  border: 2px solid var(--line);
+  font: inherit; font-size: 13px; font-weight: 900; letter-spacing: 0.15em;
+  cursor: pointer;
+}
+.btn-main:active { background: var(--bg); color: var(--line); }
+.btn-side {
+  width: 52px;
+  background: var(--bg); color: var(--txt);
+  border: 2px solid var(--line);
+  font: inherit; font-size: 12px; font-weight: 900;
+  cursor: pointer;
+}
+.btn-side.off { color: var(--muted); border-color: #2a2a2a; }
+.btn-side.danger:active { background: var(--line); color: var(--bg); }
+.btn-side:active { background: var(--hit); }
+
+.status {
+  padding: 6px 14px 10px;
+  font-size: 9px; letter-spacing: 0.2em; color: var(--muted);
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
